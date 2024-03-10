@@ -11,6 +11,7 @@
     $this->conn=$db;
    }
    
+   //lấy sách mượn theo user id hoac book id 
    public function getBorrowReturnBooks(){
    $query_params =[];
    $query = 
@@ -65,6 +66,8 @@
         }
 
 
+
+        //tạo sách mượn , borrrowed_day ngay thời gian tạo, returned_day là null
 public function createBorrowReturnBooks(){
    $query ="INSERT INTO borrow_return_books( user_id, book_id, borrowed_day,returned_day) VALUES(:user_id, :book_id, NOW(), :returned_day)";
    $stmt = $this->conn->prepare($query);
@@ -75,6 +78,7 @@ public function createBorrowReturnBooks(){
    $this->conn = null;
    return array("message"=>"tạo sách mượn công thành công.");
 }
+//xóa sách mượn qua mã mượn
 public function deleteBorrowReturnBooks(){
    $query="DELETE FROM borrow_return_books where id=:id ";
    $stmt = $this->conn->prepare($query);
@@ -90,7 +94,7 @@ public function deleteBorrowReturnBooks(){
 
    }
 }
-
+//cập nhật thời gian trả sách qua mã mượn
 public function updateBorrowReturnBooks(){
     $query = "UPDATE borrow_return_books SET returned_day = CURRENT_TIMESTAMP() where id =:id";
     $stmt = $this->conn->prepare($query);
