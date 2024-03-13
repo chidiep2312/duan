@@ -16,7 +16,7 @@
    $query_params =[];
    $query = 
    " SELECT borrow_return_books.*, users.id as user_id,books.id as book_id
-   FROM borrow_return_book
+   FROM borrow_return_books
    INNER JOIN users ON borrow_return_book.user_id = users.id
    INNER JOIN books ON borrow_return_book.book_id = books.id
    WHERE 1=1";
